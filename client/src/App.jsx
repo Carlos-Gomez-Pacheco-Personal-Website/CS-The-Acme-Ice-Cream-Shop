@@ -5,7 +5,6 @@ function App() {
   const [flavors, setFlavors] = useState([]);
 
   useEffect(() => {
-    // Fetch flavors from the server when the component mounts
     fetch("/api/flavors")
       .then((response) => response.json())
       .then((data) => setFlavors(data))
@@ -13,18 +12,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Ice Cream Flavors</h1>
-      {flavors.map((flavor) => (
-        <div key={flavor.id}>
-          <h2>{flavor.name}</h2>
-          <p>
-            {flavor.is_favorite
-              ? "This is a favorite!"
-              : "This is not a favorite."}
-          </p>
-        </div>
-      ))}
+    <div className="app">
+      <h1>Ice Cream Shop</h1>
+      <div className="flavors">
+        {flavors.map((flavor) => (
+          <div key={flavor.id} className="flavor-card">
+            <h2>{flavor.name}</h2>
+            <p>{flavor.is_favorite ? "🌟 This is a favorite!" : ""}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
